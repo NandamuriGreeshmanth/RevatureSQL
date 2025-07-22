@@ -1,0 +1,123 @@
+use classicmodels;
+
+select * from customers;
+
+select contactLastName, contactFirstName
+from customers
+order by  contactfirstname;
+
+select contactLastName, contactFirstName
+from customers
+order by  contactfirstname desc, contactLastName asc limit 5;
+
+select * from employees;
+
+select firstname, lastname, jobTitle
+from employees
+where jobTitle="Sales rep";
+
+select firstname, lastname, jobtitle, officecode
+from employees
+where jobtitle="sales rep" and officecode=1;
+
+select firstname, lastname, jobtitle, officecode
+from employees
+where jobtitle="sales rep" or officecode=1;
+
+select firstname, lastname, jobtitle, officecode
+from employees
+where officecode between 1 and 3;
+
+select firstname, lastname, jobtitle, officecode
+from employees
+where officecode in(1,2,3,4);
+
+select firstname, lastname, jobtitle, officecode
+from employees
+where lastname like '%s%';
+
+select firstname, lastname, jobtitle, officecode
+from employees
+where lastname like '%s';
+
+select firstname, lastname, jobtitle, officecode
+from employees
+where lastname like '_a__';
+
+select firstname, lastname, jobtitle, officecode
+from employees
+where lastname is not null;
+
+select firstname, lastname, jobtitle, officecode
+from employees
+where lastname is null;
+
+select e.firstname as first, e.lastname
+from employees e
+where e.firstname is not null;
+
+select count(*) 'no of employees'
+from employees
+group by firstname 
+having firstname like '%s%';
+
+select * from orders;
+
+select * from orderdetails;
+
+select o1.orderNumber, o1.orderDate, o2.quantityordered
+from orders o1
+join orderdetails o2 
+on o1.orderNumber=o2.orderNumber;
+
+select o1.orderNumber, o1.orderDate, o2.quantityordered
+from orders o1
+inner join orderdetails o2 
+on o1.orderNumber=o2.orderNumber;
+
+select o1.orderNumber, o1.orderDate, o2.quantityordered
+from orders o1
+left join orderdetails o2 
+on o1.orderNumber=o2.orderNumber;
+
+select o1.orderNumber, o1.orderDate, o2.quantityordered
+from orders o1
+right join orderdetails o2 
+on o1.orderNumber=o2.orderNumber;
+
+select o1.orderNumber, o1.orderDate, o2.quantityordered
+from orders o1
+join orderdetails o2 
+on o1.orderNumber=o2.orderNumber;
+
+select firstname, lastname from employees;
+
+select concat(firstname,' ',lastname)
+from employees;
+
+select firstname, lastname
+from employees
+union
+select contactfirstname, contactlastname
+from customers;
+
+select max(priceEach)
+from orderdetails
+where priceEach<( select max(priceEach) from orderdetails);
+
+select distinct priceEach
+from orderdetails
+order by priceEach desc
+limit 1 offset 1;
+
+select ordernumber
+from orders
+except
+select ordernumber
+from orderdetails;
+
+select firstname 
+from employees
+intersect
+select contactfirstname
+from customers;
