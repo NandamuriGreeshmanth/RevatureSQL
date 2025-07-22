@@ -1,0 +1,71 @@
+use revature_db;
+
+# to create table student
+create table Student(
+id int auto_increment primary key,
+name varchar(100) not null,
+email varchar(100) not null
+);
+
+# to insert values into table
+insert into Student(name,email) values("greeshmanth","greeshmanth@gmail.com");
+insert into Student(name,email) values("nandamuri","nandamuri@gmail.com"),("varun","varun@gmail.com");
+
+# to show the discription of table
+desc Student;
+
+select * from Student;
+
+#to know last auto_increment values
+select last_insert_id();
+
+insert into Student(name,email) values("greeshmanth","greeshmanth@gmail.com");
+
+# to add new column phone
+alter table student
+add column phone varchar(10);
+
+# to update columns
+update student
+set phone="12345678"
+where id=1;
+
+# to modify column
+alter table Student
+modify column phone varchar(20) not null;
+
+#to rename column
+alter table student
+rename column phone to mobile;
+
+alter table student
+change email emailid varchar(20);
+
+#to drop the column
+alter table student
+drop column mobile;
+
+create table table1(
+id int
+);
+
+drop table table1;
+
+# to rename the table
+alter table Student
+rename to employee;
+
+select *from employee;
+
+create table office(
+office_id int auto_increment primary key,
+address varchar(100) not null,
+emp_id int,
+foreign key(emp_id) references employee(id)
+);
+
+desc office;
+
+insert into office(address,emp_id) values("chennai",1);
+
+select *from office;
